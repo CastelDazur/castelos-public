@@ -1,0 +1,48 @@
+# CastelOS Governance Configuration
+# This demonstrates the architectural layers of a governed AI execution system
+# Actual implementation details are private
+
+system:
+  name: "example-castel-deployment"
+  version: "1.0.0"
+  governance_level: "strict"
+
+core_components:
+  # The governed core enforces all policy decisions
+  governed_core:
+    enabled: true
+    policy_engine: "constraint-based"
+    decision_log: "immutable"
+    audit_trail: "enabled"
+
+  # Runtime lifecycle management
+  runtime_manager:
+    discovery_enabled: true
+    approval_required: true
+    shadow_mode_available: true
+
+  # Launch packs define reusable execution profiles
+  launch_packs:
+    registry_path: "internal://pack-registry"
+    validation: "strict"
+    versioning: "semver"
+
+# Quality and safety profiles
+execution_profiles:
+  maximum:
+    throughput_optimized: false
+    safety_checks: "comprehensive"
+    approval_gates: 3
+  balanced:
+    safety_checks: "standard"
+    approval_gates: 2
+  throughput:
+    throughput_optimized: true
+    safety_checks: "essential"
+    approval_gates: 1
+
+# Output governance boundaries
+output_classification:
+  public_safe: ["logs", "metrics", "approved_results"]
+  protected: ["intermediate_reasoning", "sensitive_data"]
+  internal: ["system_state", "resource_allocation"]
