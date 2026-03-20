@@ -21,6 +21,48 @@ This repository contains public artifacts from the CastelOS build-in-public jour
 - System thinking notes and execution frameworks
 - Weekly insights from building a local-first AI OS
 
+## System architecture
+
+CastelOS operates as three integrated layers:
+
+<div align="center">
+  <img src="./assets/castelos-architecture-overview.svg" width="840" alt="CastelOS Architecture Overview" />
+</div>
+
+### 1. Workstation
+
+The hardware foundation where the system runs.
+Local-first design means the workstation is not just a client — it is the operating base.
+Hardware decisions shape runtime behavior, memory strategy, and latency expectations.
+
+### 2. Core
+
+The governed execution engine.
+
+- Manages runtime lifecycle (candidate → eval → shadow → approved → active)
+- Enforces approval gates for important outputs
+- Maintains task state and artifact history
+- Handles runtime upgrades safely and reversibly
+
+### 3. Packs
+
+Installable execution bundles.
+
+- Each pack encodes a task, a workflow, or a domain capability
+- Packs execute against the core's governed runtimes
+- Outputs are structured, queryable, and preservable
+- Packs can be replaced, audited, or rolled back without cascading failures
+
+### Why this structure matters
+
+This three-layer design separates concerns:
+
+- **Hardware** stays under local control
+- **Runtime** stays governed and measurable
+- **Execution** stays modular and reversible
+
+No layer depends on external defaults or SaaS-only choices. The operator makes the call.
+
 ## Philosophy
 
 - **System over model** — the value is in orchestration, not in any single LLM
@@ -34,5 +76,5 @@ This repository contains public artifacts from the CastelOS build-in-public jour
 
 I design and build local-first AI systems that combine hardware-aware runtime strategy, orchestration, knowledge automation, governance, and productized outputs.
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/casteldazur)
-[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/CastelDazur)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://linkedin.com/in/casteldazur)
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/CastelDazur)
