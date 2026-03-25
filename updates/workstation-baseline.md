@@ -1,29 +1,21 @@
 # Workstation and local-first baseline
 
-## Theme
-Why hardware-aware design matters for serious AI systems.
+## What happened this week
 
-## Public-safe summary
-This week the public documentation focused on a simple principle:
-hardware choices are architecture choices.
+Documented the workstation setup and why hardware config matters for CastelOS.
 
-When designing a local-first system, it is not enough to ask what models exist.
-You also have to ask:
-- what must stay hot,
-- - what can remain warm,
-  - - what should move to service layers,
-    - - how workloads compete,
-      - - what bottlenecks appear under real use.
-       
-        - ## What changed conceptually
-        - The public narrative now shows CastelOS as something grounded in real compute thinking, not just abstract AI language.
-       
-        - ## Why this matters
-        - Many AI products describe capability without describing operating reality.
-        - A serious execution system must respect both.
-       
-        - ## Public limitation line
-        - No sensitive hardware tuning or private runtime details are exposed.
-       
-        - ## Next topic
-        - Runtime governance lifecycle.
+## The setup
+
+Running on: RTX 3060 12GB, 32GB DDR4, Ryzen 5. Not a datacenter rig. A workstation that sits in my office.
+
+The 12GB VRAM sounds like a lot until you try to run two 7B quantized models at once. At Q4_K_M quantization, a 7B model takes about 4-5GB VRAM. So one model fits comfortably, two models need careful allocation, three is out of the question without offloading to RAM.
+
+## Why this matters for the system
+
+CastelOS needs to know these limits at startup. It polls GPU memory before loading models. If there's not enough VRAM for a second model, it queues the request instead of crashing.
+
+The warm layer (RAM) holds recently used model states and task outputs. When a model gets evicted from GPU, its state goes to RAM first, not straight to disk.
+
+## What's next
+
+Runtime governance docs. How the system decides which model version is active and what happens when you want to upgrade.
