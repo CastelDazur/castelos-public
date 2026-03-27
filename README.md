@@ -63,6 +63,22 @@ This three-layer design separates concerns:
 
 No layer depends on external defaults or SaaS-only choices. The operator makes the call.
 
+
+## Local-first design
+
+CastelOS runs on your workstation. Not as a thin client that calls an API, but as the actual execution layer.
+
+GPU handles model inference. On an RTX 5090 32 GB, that means Qwen2.5-32B runs always-on at 4-bit quantization, comfortably within VRAM limits. R1 is available via hot-swap when heavier reasoning is needed, but both models cannot run simultaneously on a single GPU. The system checks available memory before loading anything.
+
+RAM stores model state, task context, and recent outputs. 96 GB DDR5 means the warm layer can hold standby runtimes, prefetched context, and output history without hitting swap. If a model gets evicted from GPU, it goes to RAM first. Checking task history does not require a database round-trip.
+
+CPU runs the control plane. On a Ryzen 9 9950X3D, that means approval checks, lifecycle decisions, and scheduling all happen with headroom to spare. Not on the hot path for inference.
+
+Cloud is available if you configure it explicitly. Some tasks might need an external API call. But the default is local, and any external call is logged and auditable.
+
+<div align="center">
+  <img src="./assets/week-02-workstation-layers.png" width="840" alt="Workstation Layers Diagram" />
+</div>
 ## Philosophy
 
 - **System over model** — the value is in orchestration, not in any single LLM
