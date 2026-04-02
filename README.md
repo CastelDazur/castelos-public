@@ -61,6 +61,20 @@ This three-layer design separates concerns:
 
 No layer depends on external defaults or SaaS-only choices. The operator makes the call.
 
+## Runtime governance
+
+Models in CastelOS don't auto-update. New versions go through eval and shadow testing before they replace anything.
+
+The lifecycle: candidate (identified), eval (tested in isolation), shadow (tested on real workloads without affecting output), approved (active), rollback (revert if needed).
+
+I learned this the hard way after swapping a model that looked better on benchmarks but behaved differently on actual tasks. The formatting changed just enough to break a downstream pack. Now every model change has a paper trail and a rollback path.
+
+Shadow testing is the most useful stage. Synthetic benchmarks tell you speed and perplexity. Shadow tells you if the model actually works with your specific tasks and context windows.
+
+See [docs/runtime-lifecycle-public.md](docs/runtime-lifecycle-public.md) for the full governance guide and [assets/runtime-lifecycle-flow.mermaid](assets/runtime-lifecycle-flow.mermaid) for the visual pipeline diagram.
+
+Internal eval configs and transition rules are not in this repo.
+
 ## Philosophy
 
 - **System over model** — the value is in orchestration, not in any single LLM
