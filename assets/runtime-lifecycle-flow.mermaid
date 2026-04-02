@@ -1,0 +1,26 @@
+graph LR
+    subgraph "Runtime Lifecycle Pipeline"
+        C[Candidate<br/>Identified, not tested] --> S[Shadow<br/>Parallel execution, no impact]
+        S --> A[Approved Active<br/>Serving production traffic]
+        A --> F[Fallback Only<br/>Still usable, not preferred]
+    end
+
+    subgraph "Safety Controls"
+        C -.->|policy violation| B[Blocked<br/>Cannot serve traffic]
+        S -.->|policy violation| B
+        A -.->|policy violation| B
+        A -.->|end of life| D[Deprecated<br/>No new traffic]
+    end
+
+    subgraph "Rollback Path"
+        A -->|issues detected| R[Rollback<br/>Revert to previous approved]
+        R --> A
+    end
+
+    style C fill:#e8e8e8,stroke:#666,color:#000
+    style S fill:#fff3cd,stroke:#ffc107,color:#000
+    style A fill:#d4edda,stroke:#28a745,color:#000
+    style F fill:#d1ecf1,stroke:#17a2b8,color:#000
+    style B fill:#f8d7da,stroke:#dc3545,color:#000
+    style D fill:#e2e3e5,stroke:#6c757d,color:#000
+    style R fill:#fff3cd,stroke:#fd7e14,color:#000
