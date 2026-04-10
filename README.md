@@ -81,3 +81,15 @@ Internal eval configs and transition rules are not in this repo.
 - **Execution over chat** — real outputs with artifacts, not just conversations
 - **Governance over hype** — controlled, repeatable, auditable workflows
 - **Local-first** — privacy, speed, and ownership by design
+
+## Trust and approvals
+
+Not every AI output should be used without checking it first.
+
+CastelOS classifies outputs by risk level. Low-risk tasks (structured extraction with known templates) pass through automatically but still get logged. Higher-risk outputs (new task types, anything shared externally) require human review before they're used.
+
+I added this after a model produced a plausible-looking but wrong number in a summary. Caught it by accident. Now anything that leaves the system or goes to someone else hits a review gate first.
+
+The approval log records who approved what and when. If an output causes problems later, you can trace it back to the approval decision.
+
+Internal approval rules and risk classifications are not part of this public repo.
