@@ -1,0 +1,26 @@
+%%{init: {'theme': 'dark', 'themeVariables': {'primaryColor': '#1e3a5f', 'primaryTextColor': '#e2e8f0', 'primaryBorderColor': '#38bdf8', 'lineColor': '#64748b', 'secondaryColor': '#0f1419', 'tertiaryColor': '#1a2332'}}}%%
+flowchart TD
+    A[Task received] --> B[Route to capability]
+    B --> C[Governed runtime executes]
+    C --> D{Risk level?}
+    D -->|Low risk| E[Auto-approve + log]
+    D -->|Medium / High risk| F[Queue for review]
+    F --> G{Operator decision}
+    G -->|Approve| H[Output released]
+    G -->|Reject| I[Output blocked + logged]
+    E --> H
+    H --> J[Publish / deliver]
+    I --> K[Feedback loop to runtime]
+    K --> C
+
+    style A fill:#1e3a5f,stroke:#38bdf8,color:#e2e8f0
+    style B fill:#1e3a5f,stroke:#38bdf8,color:#e2e8f0
+    style C fill:#1e3a5f,stroke:#38bdf8,color:#e2e8f0
+    style D fill:#0f2a1f,stroke:#4ade80,color:#e2e8f0
+    style E fill:#1a2332,stroke:#64748b,color:#94a3b8
+    style F fill:#2a1a0f,stroke:#f59e0b,color:#e2e8f0
+    style G fill:#2a1a0f,stroke:#f59e0b,color:#e2e8f0
+    style H fill:#0f2a1f,stroke:#4ade80,color:#e2e8f0
+    style I fill:#2a0f0f,stroke:#f87171,color:#e2e8f0
+    style J fill:#0f2a1f,stroke:#4ade80,color:#e2e8f0
+    style K fill:#1a2332,stroke:#64748b,color:#94a3b8
