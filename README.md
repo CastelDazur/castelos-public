@@ -93,3 +93,15 @@ I added this after a model produced a plausible-looking but wrong number in a su
 The approval log records who approved what and when. If an output causes problems later, you can trace it back to the approval decision.
 
 Internal approval rules and risk classifications are not part of this public repo.
+
+## Open-source tools
+
+A few parts of this work stand on their own, so I pulled them into separate repos. Each came from a problem that cost me a real run or a wasted afternoon.
+
+- **[gpu-memory-guard](https://github.com/CastelDazur/gpu-memory-guard)** watches GPU memory and steps in before one process takes the whole card. Published on PyPI.
+- **[llm-judge-jury](https://github.com/CastelDazur/llm-judge-jury)** has several models vote on an output instead of trusting one judge that shares the same blind spots.
+- **[qlora-single-gpu-playbook](https://github.com/CastelDazur/qlora-single-gpu-playbook)** gathers the guards that keep a QLoRA run alive on a single card: VRAM gating, resume without the hang, checkpoint repair after a crash.
+- **[merge-quantize-keep-mtp](https://github.com/CastelDazur/merge-quantize-keep-mtp)** merges two LoRA adapters by rank, then checks the speculative-decoding heads actually survived quantization.
+- **[awesome-local-ai](https://github.com/CastelDazur/awesome-local-ai)** is a curated list of tools for running models on your own hardware.
+
+All MIT except the list, which is CC0.
